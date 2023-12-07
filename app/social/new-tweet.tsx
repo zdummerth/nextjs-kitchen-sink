@@ -1,7 +1,7 @@
 "use client";
 import { User, createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { useFormState, useFormStatus } from "react-dom";
-import { addTweet } from "@/app/actions";
+import { addTweet } from "@/app/social/actions";
 import Image from "next/image";
 import { useRef } from "react";
 import { toast } from "react-toastify";

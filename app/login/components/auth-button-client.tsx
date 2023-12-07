@@ -23,12 +23,15 @@ export default function AuthButtonClient({
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.refresh();
+    // router.push("/login");
   };
 
   return session ? (
-    <button className="text-xs text-gray-400" onClick={handleSignOut}>
-      Logout
-    </button>
+    <form action="/auth/logout" method="post">
+      <button className="text-xs text-gray-400" type="submit">
+        Sign out
+      </button>
+    </form>
   ) : (
     <button className="text-xs text-gray-400" onClick={handleSignIn}>
       Login

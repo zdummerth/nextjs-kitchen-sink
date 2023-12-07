@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="bg-gray-900 min-h-screen flex">{children}</div>
+        <div className="bg-gray-900 min-h-screen flex flex-col">{children}</div>
         <ToastContainer className="flex justify-end" theme="dark" />
       </body>
     </html>
