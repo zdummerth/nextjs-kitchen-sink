@@ -1,12 +1,12 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import AuthButtonServer from "@/app/login/components/auth-button-server";
+import ProfileForm from "./profile-form";
 import { redirect } from "next/navigation";
-import ProductListing from "./components/product-listing";
 import Navigation from "@/components/navigation";
 
-export default async function Home() {
+export default async function Account() {
   const supabase = createServerComponentClient<Database>({ cookies });
+
   const {
     data: { session },
   } = await supabase.auth.getSession();
@@ -25,25 +25,10 @@ export default async function Home() {
     return <div>No profile found for session</div>;
   }
 
-  const { data } = await supabase
-    .from("products")
-    .select("*, variants: product_variants(*)")
-    .order("created_at", { ascending: false });
-
-  if (!data) {
-    return <div>No products found</div>;
-  }
-
   return (
-    <>
+    <div>
       <Navigation profile={profile} />
-      <div className="grid gap-2 grid-cols-1 sm:grid-cols-2">
-        {data?.map((product) => (
-          <div key={product.id}>
-            <ProductListing key={product.id} product={product} />
-          </div>
-        ))}
-      </div>
-    </>
+      <ProfileForm profile={profile} />
+    </div>
   );
 }

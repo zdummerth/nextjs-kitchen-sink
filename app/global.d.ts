@@ -1,15 +1,16 @@
 import { Database as DB } from "@/lib/database.types";
 import { type } from "os";
 type Tweet = DB["public"]["Tables"]["tweets"]["Row"];
-type Profile = DB["public"]["Tables"]["profiles"]["Row"];
+type DBProfile = DB["public"]["Tables"]["profiles"]["Row"];
 type DBAddress = DB["public"]["Tables"]["addresses"]["Row"];
 type DBProduct = DB["public"]["Tables"]["products"]["Row"];
 type DBProductVariant = DB["public"]["Tables"]["product_variants"]["Row"];
 
 declare global {
   type Database = DB;
+  type Profile = DBProfile;
   type TweetWithAuthor = Tweet & {
-    author: Profile;
+    author: DBProfile;
     likes: number;
     user_has_liked_tweet: boolean;
   };

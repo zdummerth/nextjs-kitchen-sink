@@ -26,7 +26,7 @@ export default function ProductListing({ product }: { product: Product }) {
         height={600}
         className="group-hover:scale-110 transition-all duration-500"
       />
-      <h1 className="absolute bottom-2 left-2 rounded-full bg-slate-900/90 py-2 px-4 text-lg font-semibold">
+      <h1 className="absolute bottom-2 left-2 rounded-full bg-boxdark/90 text-white py-2 px-4 text-lg font-semibold">
         {product.title}
       </h1>
     </Link>

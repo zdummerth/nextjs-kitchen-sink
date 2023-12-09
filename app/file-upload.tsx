@@ -4,7 +4,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 
-export default function Avatar({
+export default function FileUpload({
   uid,
   url,
   size,

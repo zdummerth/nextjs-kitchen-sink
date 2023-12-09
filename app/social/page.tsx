@@ -2,6 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AuthButtonServer from "../login/components/auth-button-server";
 import { redirect } from "next/navigation";
+import Navigation from "@/components/navigation";
 
 import NewTweet from "./new-tweet";
 import Tweets from "./tweets";
@@ -21,6 +22,16 @@ export default async function Home() {
     .select("*, author: profiles(*), likes(user_id)")
     .order("created_at", { ascending: false });
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", session.user.id)
+    .single();
+
+  if (!profile) {
+    return <div>No profile found for session</div>;
+  }
+
   const tweets =
     data?.map((tweet) => ({
       ...tweet,
@@ -32,15 +43,12 @@ export default async function Home() {
     })) ?? [];
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-2">
-      <div className="flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0">
-        <h1 className="text-xl font-bold">Home</h1>
-        <span>{session.user.user_metadata.user_name}</span>
-        <AuthButtonServer />
+    <div className="w-full">
+      <Navigation profile={profile} />
+      <div className="dark:bg-boxdark dark:text-white">
+        <NewTweet user={session.user} />
+        <Tweets tweets={tweets} />
       </div>
-
-      <NewTweet user={session.user} />
-      <Tweets tweets={tweets} />
     </div>
   );
 }

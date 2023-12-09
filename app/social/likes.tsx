@@ -94,7 +94,7 @@ export default function Likes({ tweet }: { tweet: TweetWithAuthor }) {
           className={`group-hover:fill-red-600 group-hover:stroke-red-600 ${
             dataState.user_has_liked_tweet
               ? "fill-red-600 stroke-red-600"
-              : "fill-none stroke-gray-500"
+              : "fill-none stroke-black dark:stroke-white"
           }`}
         >
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>

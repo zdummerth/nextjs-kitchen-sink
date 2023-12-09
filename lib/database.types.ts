@@ -230,16 +230,19 @@ export interface Database {
           avatar_url: string
           id: string
           username: string
+          website: string | null
         }
         Insert: {
           avatar_url: string
           id: string
           username: string
+          website?: string | null
         }
         Update: {
           avatar_url?: string
           id?: string
           username?: string
+          website?: string | null
         }
         Relationships: [
           {
