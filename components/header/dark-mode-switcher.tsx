@@ -1,8 +1,8 @@
 "use client";
-import useColorMode from "@/hooks/use-color-mode";
+import { useTheme } from "next-themes";
 
 const DarkModeSwitcher = () => {
-  const [colorMode, setColorMode] = useColorMode();
+  const { theme, setTheme } = useTheme();
 
   return (
     <div>
@@ -11,11 +11,9 @@ const DarkModeSwitcher = () => {
       >
         <input
           type="checkbox"
-          onChange={() => {
-            if (typeof setColorMode === "function") {
-              setColorMode(colorMode === "light" ? "dark" : "light");
-            }
-          }}
+          onChange={() =>
+            theme == "dark" ? setTheme("light") : setTheme("dark")
+          }
           className="dur absolute top-0 z-50 m-0 h-full w-full cursor-pointer opacity-0"
         />
         <span

@@ -19,7 +19,7 @@ export default async function Home() {
 
   const { data } = await supabase
     .from("tweets")
-    .select("*, author: profiles(*), likes(user_id)")
+    .select("*, author: profiles(*), likes(user_id), image: tweet_image(*)")
     .order("created_at", { ascending: false });
 
   const { data: profile } = await supabase
@@ -45,9 +45,11 @@ export default async function Home() {
   return (
     <div className="w-full">
       <Navigation profile={profile} />
-      <div className="dark:bg-boxdark dark:text-white">
-        <NewTweet user={session.user} />
-        <Tweets tweets={tweets} />
+      <div>
+        <NewTweet profile={profile} />
+        <div className="flex flex-col gap-6 m-4">
+          <Tweets tweets={tweets} />
+        </div>
       </div>
     </div>
   );

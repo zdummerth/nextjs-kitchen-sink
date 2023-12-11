@@ -2,7 +2,9 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AuthButtonServer from "@/app/login/components/auth-button-server";
 import { redirect } from "next/navigation";
-import ProductListing from "./components/product-listing";
+import ProductListing, {
+  ProductListingAlt,
+} from "./components/product-listing";
 import Navigation from "@/components/navigation";
 
 export default async function Home() {
@@ -40,7 +42,7 @@ export default async function Home() {
       <div className="grid gap-2 grid-cols-1 sm:grid-cols-2">
         {data?.map((product) => (
           <div key={product.id}>
-            <ProductListing key={product.id} product={product} />
+            <ProductListingAlt key={product.id} product={product} />
           </div>
         ))}
       </div>

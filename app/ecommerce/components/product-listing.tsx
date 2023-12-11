@@ -32,3 +32,33 @@ export default function ProductListing({ product }: { product: Product }) {
     </Link>
   );
 }
+
+export function ProductListingAlt({ product }: { product: Product }) {
+  const supabase = createServerComponentClient<Database>({ cookies });
+
+  const {
+    data: { publicUrl },
+  } = supabase.storage
+    .from("product_images")
+    .getPublicUrl(product.featured_image || "");
+
+  const imageUrl = publicUrl || "https://placehold.co/600";
+
+  return (
+    <Link
+      href={`ecommerce/product/${product.title_slug}`}
+      className="relative block group overflow-hidden rounded m-10"
+    >
+      <div className="overflow-hidden">
+        <Image
+          src={imageUrl}
+          alt={product.title}
+          width={600}
+          height={600}
+          className="hover:scale-110 transition-all duration-500 overflow-hidden"
+        />
+      </div>
+      <h1 className="py-2 text-lg font-semibold">{product.title}</h1>
+    </Link>
+  );
+}

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 import { ToastContainer } from "react-toastify";
+// import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+// import { cookies } from "next/headers";
+import Providers from "./themes/providers";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
@@ -15,19 +18,34 @@ export const metadata: Metadata = {
   description: "Beyond the Source: A View into My Web Development World",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // const supabase = createServerComponentClient<Database>({ cookies });
+  // const {
+  //   data: { session },
+  // } = await supabase.auth.getSession();
+
+  // let profile = null;
+  // if (session) {
+  //   const { data } = await supabase
+  //     .from("profiles")
+  //     .select("*")
+  //     .eq("id", session.user.id)
+  //     .single();
+  //   profile = data;
+  // }
   return (
-    // <html lang="en" className={inter.className}>
-    <html lang="en" className={robotoSlab.className}>
-      <body>
-        <div className="min-h-screen flex flex-col dark:bg-boxdark dark:text-white">
-          {children}
-        </div>
-        <ToastContainer className="flex justify-end" theme="dark" />
+    <html lang="en" suppressHydrationWarning>
+      <body className={robotoSlab.className}>
+        <Providers>
+          <div className="min-h-screen flex flex-col bg-zinc-200 dark:bg-zinc-700 dark:text-white">
+            {children}
+          </div>
+          <ToastContainer className="flex justify-end" theme="dark" />
+        </Providers>
       </body>
     </html>
   );

@@ -254,26 +254,63 @@ export interface Database {
           }
         ]
       }
+      tweet_image: {
+        Row: {
+          created_at: string
+          file_name: string
+          height: number
+          id: number
+          url: string
+          width: number
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          height: number
+          id?: number
+          url: string
+          width: number
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          height?: number
+          id?: number
+          url?: string
+          width?: number
+        }
+        Relationships: []
+      }
       tweets: {
         Row: {
           created_at: string
           id: string
+          image_id: number | null
           title: string
           user_id: string
         }
         Insert: {
           created_at?: string
           id?: string
+          image_id?: number | null
           title: string
           user_id: string
         }
         Update: {
           created_at?: string
           id?: string
+          image_id?: number | null
           title?: string
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "tweets_image_id_fkey"
+            columns: ["image_id"]
+            isOneToOne: false
+            referencedRelation: "tweet_image"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "tweets_user_id_fkey"
             columns: ["user_id"]

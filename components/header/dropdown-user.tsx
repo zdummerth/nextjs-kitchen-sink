@@ -44,8 +44,8 @@ const DropdownUser = ({ profile }: { profile: Profile }) => {
         className="flex items-center gap-4"
         href="#"
       >
-        <span className="h-12 w-12 rounded-full overflow-hidden">
-          <Image width={112} height={112} src={profile.avatar_url} alt="User" />
+        <span className="rounded-full overflow-hidden">
+          <Image width={32} height={32} src={profile.avatar_url} alt="User" />
         </span>
 
         <svg
@@ -70,7 +70,7 @@ const DropdownUser = ({ profile }: { profile: Profile }) => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute z-100 right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${
+        className={`absolute z-100 right-0 mt-4 flex w-62.5 flex-col rounded-sm drop-shadow-lg bg-zinc-100 dark:bg-zinc-800 ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >

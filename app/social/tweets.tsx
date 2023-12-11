@@ -33,10 +33,12 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   //     };
   //   }, [supabase, router]);
 
+  console.log(tweets[0]);
+
   return tweets.map((tweet) => (
     <div
       key={tweet.id}
-      className="border border-gray-800 border-t-0 px-4 py-8 flex"
+      className="px-4 py-4 flex rounded-md shadow-sm shadow-cyan-200 bg-zinc-100 dark:bg-zinc-600 dark:text-white"
     >
       <div className="h-12 w-12">
         <Image
@@ -52,6 +54,14 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           <span className="font-bold">{tweet.author.username}</span>
         </p>
         <p>{tweet.title}</p>
+        {tweet.image && (
+          <Image
+            src={tweet.image.url}
+            alt="tweet image"
+            width={tweet.image.width}
+            height={tweet.image.height}
+          />
+        )}
         <Likes tweet={tweet} />
       </div>
     </div>

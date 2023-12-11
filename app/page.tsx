@@ -25,7 +25,7 @@ export default async function Home() {
   }
 
   const textGradient =
-    "text-transparent bg-clip-text bg-gradient-to-br from-black dark:from-white via-[#56c8f2] dark:via-[#56c8f2] to-black dark:to-white";
+    "text-transparent bg-clip-text bg-gradient-to-br from-black dark:from-white via-cyan-300 dark:via-cyan-300 to-black dark:to-white";
 
   return (
     <div className="w-full">

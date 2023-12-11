@@ -5,11 +5,13 @@ type DBProfile = DB["public"]["Tables"]["profiles"]["Row"];
 type DBAddress = DB["public"]["Tables"]["addresses"]["Row"];
 type DBProduct = DB["public"]["Tables"]["products"]["Row"];
 type DBProductVariant = DB["public"]["Tables"]["product_variants"]["Row"];
+type DBTweetImage = DB["public"]["Tables"]["tweet_image"]["Row"];
 
 declare global {
   type Database = DB;
   type Profile = DBProfile;
   type TweetWithAuthor = Tweet & {
+    image: TweetImage | null;
     author: DBProfile;
     likes: number;
     user_has_liked_tweet: boolean;
@@ -33,5 +35,9 @@ declare global {
     lines: CartItem[];
     total_price: number;
     total_quantity: number;
+  };
+  type TweetImage = DBTweetImage;
+  type TweetImageWithFile = TweetImage & {
+    file: File;
   };
 }

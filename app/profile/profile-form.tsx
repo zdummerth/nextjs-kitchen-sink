@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Avatar from "./avatar";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 
 const isDemoUser = (username: string) =>
   ["peter-doe", "john-doe", "tracy-doe"].includes(username);
@@ -14,6 +15,7 @@ export default function AccountForm({ profile }: { profile: Profile }) {
     profile.avatar_url
   );
   const [username, setUsername] = useState<string | null>(profile.username);
+  const router = useRouter();
 
   console.log("profile in AccountForm: ", avatar_url);
   async function updateProfile({
@@ -36,6 +38,7 @@ export default function AccountForm({ profile }: { profile: Profile }) {
         .eq("id", profile.id);
       console.log("res in updateProfile: ", res);
       if (res.error) throw res.error;
+      router.refresh();
     } catch (error) {
       console.log("Error updating profile: ", error);
       alert("Error updating the data!");
@@ -57,7 +60,13 @@ export default function AccountForm({ profile }: { profile: Profile }) {
           }}
         />
       </div>
-      <div className="flex flex-col gap-5.5 p-6.5">
+      <form
+        className="flex flex-col gap-5.5 p-6.5"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          await updateProfile({ website, avatar_url });
+        }}
+      >
         <div>
           <label className="mb-3 block text-black dark:text-white">
             Username
@@ -87,13 +96,13 @@ export default function AccountForm({ profile }: { profile: Profile }) {
         </div>
         <div>
           <button
-            onClick={() => updateProfile({ website, avatar_url })}
+            type="submit"
             className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
           >
             {loading ? "Loading ..." : "Update"}
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
