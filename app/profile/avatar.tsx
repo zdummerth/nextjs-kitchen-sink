@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 import CameraIcon from "@/lib/svg-icons/camera";
+import { uploadFile } from "@/lib/supabase-client";
 
 export default function Avatar({
   uid,
@@ -34,25 +35,17 @@ export default function Avatar({
       }
 
       const file = event.target.files[0];
-      const fileExt = file.name.split(".").pop();
-      const filePath = `${uid}-${Math.random()}.${fileExt}`;
 
-      let { error: uploadError } = await supabase.storage
-        .from("avatars")
-        .upload(filePath, file);
+      const { error, url } = await uploadFile({
+        bucket: "avatars",
+        file,
+      });
 
-      if (uploadError) {
-        throw uploadError;
+      if (!url) {
+        throw error;
       }
 
-      const {
-        data: { publicUrl },
-      } = supabase.storage.from("avatars").getPublicUrl(filePath);
-
-      if (!publicUrl) {
-        throw new Error("No public url found for avatar");
-      }
-      onUpload(publicUrl);
+      onUpload(url);
     } catch (error) {
       alert("Error uploading avatar!");
     } finally {

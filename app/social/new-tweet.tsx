@@ -1,19 +1,25 @@
 "use client";
-import { addTweet } from "@/app/social/actions";
 import Image from "next/image";
-import { useRef, useState } from "react";
-// import { useFormState } from "react-dom";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import CameraIcon from "@/lib/svg-icons/camera";
-import { ImageUpload } from "@/app/social/actions";
+import PhotoIcon from "@/lib/svg-icons/photo";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import LoadingDots from "@/components/loading-dots";
+import { uploadFile } from "@/lib/supabase-client";
+
+type ImageUpload = {
+  width: number;
+  height: number;
+  url: string;
+  file_name: string;
+  file: File;
+};
 
 export default function NewTweet({ profile }: { profile: Profile }) {
-  // const [state, formAction] = useFormState<any>(addTweet, initialState);
-  const ref = useRef<HTMLFormElement>(null);
   const [image, setImage] = useState<ImageUpload | undefined>(undefined);
   const [uploading, setUploading] = useState(false);
+  const [title, setTitle] = useState("");
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
 
@@ -51,9 +57,8 @@ export default function NewTweet({ profile }: { profile: Profile }) {
 
   return (
     <form
-      ref={ref}
-      action={async (formData) => {
-        const title = String(formData.get("title"));
+      onSubmit={async (e) => {
+        e.preventDefault();
         if (!title) {
           toast.error("Title is required!");
           return;
@@ -61,33 +66,29 @@ export default function NewTweet({ profile }: { profile: Profile }) {
         setUploading(true);
         let image_id = null;
         if (image) {
-          const { error: imageUploadError } = await supabase.storage
-            .from("tweet_images")
-            .upload(image.file_name, image.file);
-          if (imageUploadError) {
+          const { error: imageUploadError, url } = await uploadFile({
+            bucket: "tweet_images",
+            file: image.file,
+          });
+          if (!url) {
             console.log(imageUploadError);
             toast.error("Error uploading image!");
             setUploading(false);
             return;
           }
-          const {
-            data: { publicUrl },
-          } = supabase.storage
-            .from("tweet_images")
-            .getPublicUrl(image.file_name);
 
           const { data: imageData, error: imageError } = await supabase
             .from("tweet_image")
             .insert({
               width: image.width,
               height: image.height,
-              url: publicUrl,
+              url: url,
               file_name: image.file_name,
             })
             .select()
             .single();
           if (imageError) {
-            toast.error("Error uploading image!");
+            toast.error("Error inserting image!");
             setUploading(false);
             return;
           }
@@ -98,16 +99,15 @@ export default function NewTweet({ profile }: { profile: Profile }) {
           .from("tweets")
           .insert({ title, user_id: profile.id, image_id });
         if (tweetError) {
-          console.log(tweetError);
           toast.error("Error inserting tweet!");
           return { error: "Error inserting tweet" };
         }
-        router.refresh();
-        ref.current?.reset();
         setImage(undefined);
         setUploading(false);
+        setTitle("");
+        router.refresh();
       }}
-      className="block relative mx-2 my-4 pb-4 rounded-md bg-gray-3 dark:bg-boxdark dark:text-white"
+      className="block relative my-4 rounded-md bg-gray-3 dark:bg-boxdark dark:text-white"
     >
       <Image
         src={profile.avatar_url}
@@ -119,6 +119,8 @@ export default function NewTweet({ profile }: { profile: Profile }) {
       <textarea
         name="title"
         id="title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         rows={3}
         className="resize-none block w-full bg-inherit rounded-t-md outline-none py-1.5 pl-12 pr-20"
         placeholder="What's happening?"
@@ -130,7 +132,8 @@ export default function NewTweet({ profile }: { profile: Profile }) {
             onClick={() => {
               setImage(undefined);
             }}
-            className="absolute top-1 right-1 text-white bg-red-500 rounded-full w-6 h-6 flex items-center justify-center"
+            type="button"
+            className="absolute top-1 right-1 text-white bg-black/75 rounded-full w-6 h-6 flex items-center justify-center"
           >
             X
           </button>
@@ -143,12 +146,12 @@ export default function NewTweet({ profile }: { profile: Profile }) {
           />
         </div>
       )}
-      <div className="flex justify-end">
+      <div className="flex justify-between items-center py-2 mx-2 mt-2 border-t-[1px]">
         <label
           htmlFor="profile"
-          className={`mx-4 mt-4 flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full border text-black dark:text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2`}
+          className={`block h-8.5 w-8.5 flex justify-center items-center cursor-pointer text-black dark:text-white hover:text-cyan-400 sm:bottom-2 sm:right-2`}
         >
-          <CameraIcon />
+          <PhotoIcon />
           <input
             type="file"
             name="profile"
@@ -158,16 +161,14 @@ export default function NewTweet({ profile }: { profile: Profile }) {
             onChange={onImageChange}
           />
         </label>
-      </div>
-      <div className="flex justify-end">
         <button
           type="submit"
           disabled={uploading}
           className={`${
             uploading ? "animate-pulse cursor-wait" : ""
-          } bg-primary text-white px-4 py-2 rounded-full mr-4 mt-2`}
+          } bg-cyan-500 text-white w-18 h-10 rounded-full hover:bg-opacity-90`}
         >
-          Submit
+          {uploading ? <LoadingDots /> : "Post"}
         </button>
       </div>
     </form>

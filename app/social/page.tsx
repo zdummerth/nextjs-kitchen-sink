@@ -45,9 +45,9 @@ export default async function Home() {
   return (
     <div className="w-full">
       <Navigation profile={profile} />
-      <div>
+      <div className="max-w-xl mx-auto px-2">
         <NewTweet profile={profile} />
-        <div className="flex flex-col gap-6 m-4">
+        <div className="flex flex-col gap-6 mt-4">
           <Tweets tweets={tweets} />
         </div>
       </div>

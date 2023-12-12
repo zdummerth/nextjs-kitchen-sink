@@ -33,34 +33,36 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   //     };
   //   }, [supabase, router]);
 
-  console.log(tweets[0]);
+  // console.log(tweets[0]);
 
   return tweets.map((tweet) => (
     <div
       key={tweet.id}
       className="px-4 py-4 flex rounded-md shadow-sm shadow-cyan-200 bg-zinc-100 dark:bg-zinc-600 dark:text-white"
     >
-      <div className="h-12 w-12">
+      <div className="relative w-8 flex-none">
         <Image
-          className="rounded-full"
+          className="rounded-full w-full"
           src={tweet.author.avatar_url}
           alt="tweet user avatar"
           width={48}
           height={48}
         />
       </div>
-      <div className="ml-4">
+      <div className="ml-2">
         <p>
           <span className="font-bold">{tweet.author.username}</span>
         </p>
-        <p>{tweet.title}</p>
+        <p className="mb-1">{tweet.title}</p>
         {tweet.image && (
-          <Image
-            src={tweet.image.url}
-            alt="tweet image"
-            width={tweet.image.width}
-            height={tweet.image.height}
-          />
+          <div className="rounded-md overflow-hidden mb-2">
+            <Image
+              src={tweet.image.url}
+              alt="tweet image"
+              width={tweet.image.width}
+              height={tweet.image.height}
+            />
+          </div>
         )}
         <Likes tweet={tweet} />
       </div>
