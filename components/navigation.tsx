@@ -8,7 +8,7 @@ export default function Navigation({ profile }: { profile: Profile }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="relative z-1 dark:bg-boxdark-2 dark:text-bodydark">
+    <div className="relative z-1">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <Header
         sidebarOpen={sidebarOpen}

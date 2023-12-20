@@ -41,7 +41,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={robotoSlab.className}>
         <Providers>
-          <div className="min-h-screen flex flex-col bg-zinc-200 dark:bg-zinc-700 dark:text-white">
+          <div className="min-h-screen flex flex-col dark:bg-gradient-to-r dark:from-gray-900 dark:to-gray-600 dark:text-white">
             {children}
           </div>
           <ToastContainer className="flex justify-end" theme="dark" />

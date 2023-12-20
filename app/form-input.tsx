@@ -12,7 +12,7 @@ export function FormSelect({
 }) {
   return (
     <div className={`flex flex-col ${wrapperClassname ?? ""}`}>
-      <label htmlFor={inputProps.id} className="text-gray-300 text-sm mb-1">
+      <label htmlFor={inputProps.id} className="text-gray-600 text-sm mb-1">
         {label}
       </label>
       <select
@@ -27,21 +27,25 @@ export function FormSelect({
   );
 }
 export default function FormInput({
-  inputProps,
   label,
   wrapperClassname,
+  inputProps,
 }: {
+  // inputProps: any;
   inputProps: InputHTMLAttributes<HTMLInputElement>;
   label: string;
   wrapperClassname?: string;
 }) {
   return (
     <div className={`flex flex-col ${wrapperClassname ?? ""}`}>
-      <label htmlFor={inputProps.id} className="text-gray-300 text-sm mb-1">
+      <label
+        htmlFor={inputProps.id}
+        className="text-gray-700 dark:text-gray-200 text-sm mb-1"
+      >
         {label}
       </label>
       <input
-        className={`border rounded bg-inherit leading-loose placeholder-gray-500 px-2 h-10 ${
+        className={`border-[1px] border-gray-700/25 dark:border-gray-200/50 rounded bg-gray-100 dark:bg-gray-600 leading-loose placeholder-gray-500 px-2 h-10 ${
           inputProps.className ?? ""
         }`}
         {...inputProps}

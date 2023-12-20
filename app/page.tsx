@@ -3,6 +3,13 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Navigation from "@/components/navigation";
 import Image from "next/image";
+import DualImageWithContent from "@/components/sections/dual-image-with-content";
+import DefaultHero from "@/components/sections/default-hero";
+import ImageWithContent from "@/components/sections/image-with-content";
+import StickyImageWithContent from "@/components/sections/sticky-image-with-content";
+import TripleImageWithContent from "@/components/sections/triple-image-with-content";
+import ContentWithUspGrid from "@/components/sections/content-with-usp-grid";
+import ImageOffsetWithContent from "@/components/sections/image-offset-with-content";
 
 export default async function Home() {
   const supabase = createServerComponentClient<Database>({ cookies });
@@ -79,6 +86,42 @@ export default async function Home() {
             </div>
           </div>
         </div>
+        <ImageOffsetWithContent
+          image={{
+            src: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+            alt: "Party",
+            objectFit: "cover",
+          }}
+          title="Grow your audience"
+          subtitle="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut qui hic atque tenetur quis eius quos ea neque sunt, accusantium soluta minus veniam tempora deserunt? Molestiae eius quidem quam repellat."
+          cta1={{
+            text: "Get started",
+            href: "#",
+          }}
+        />
+        <ImageWithContent
+          image={{
+            src: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+            alt: "Party",
+            objectFit: "cover",
+          }}
+          title="Grow your audience"
+          subtitle="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut qui hic atque tenetur quis eius quos ea neque sunt, accusantium soluta minus veniam tempora deserunt? Molestiae eius quidem quam repellat."
+          cta1={{
+            text: "Get started",
+            href: "#",
+          }}
+          cta2={{
+            text: "Learn more",
+            href: "#",
+          }}
+        />
+
+        <ContentWithUspGrid />
+        <TripleImageWithContent />
+        <DualImageWithContent />
+        <DefaultHero />
+        <StickyImageWithContent />
       </div>
     </div>
   );

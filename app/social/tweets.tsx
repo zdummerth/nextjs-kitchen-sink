@@ -38,7 +38,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   return tweets.map((tweet) => (
     <div
       key={tweet.id}
-      className="px-4 py-4 flex rounded-md shadow-sm shadow-cyan-200 bg-zinc-100 dark:bg-zinc-600 dark:text-white"
+      className="px-4 py-4 flex rounded-md bg-zinc-100 dark:bg-zinc-700 dark:text-white"
     >
       <div className="relative w-8 flex-none">
         <Image

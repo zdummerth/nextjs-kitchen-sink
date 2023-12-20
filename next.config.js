@@ -14,6 +14,15 @@ const nextConfig = {
       {
         hostname: "ui-avatars.com",
       },
+      {
+        hostname: "flowbite.s3.amazonaws.com",
+      },
+      {
+        hostname: "tailwindui.com",
+      },
+      {
+        hostname: "images.unsplash.com",
+      },
     ],
   },
 };

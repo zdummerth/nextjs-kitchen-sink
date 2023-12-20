@@ -98,10 +98,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     <React.Fragment>
                       <Link
                         href="#"
-                        className={`group block relative flex justify-between gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                          (pathname === "/" ||
-                            pathname.includes("dashboard")) &&
-                          "bg-graydark dark:bg-meta-4"
+                        className={`group block relative flex justify-between gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
+                          pathname === "/" &&
+                          "bg-graydark dark:bg-meta-4 text-white"
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -125,9 +124,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           <li>
                             <Link
                               href="/ecommerce"
-                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                pathname === "/" && "text-white"
-                              } `}
+                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white `}
                             >
                               Home
                             </Link>
@@ -135,9 +132,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           <li>
                             <Link
                               href="/ecommerce/catalog"
-                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                pathname === "/" && "text-white"
-                              } `}
+                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white `}
                             >
                               Catalog
                             </Link>
@@ -152,8 +147,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href="/social"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes("social") && "bg-graydark dark:bg-meta-4"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
+                    pathname.includes("social") &&
+                    "bg-graydark dark:bg-meta-4 text-white"
                   }`}
                 >
                   Social
@@ -162,12 +158,23 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href="/business-management"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
                     pathname.includes("business-management") &&
-                    "bg-graydark dark:bg-meta-4"
+                    "bg-graydark dark:bg-meta-4 text-white"
                   }`}
                 >
                   Businesses
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/messages"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
+                    pathname.includes("messages") &&
+                    "bg-graydark dark:bg-meta-4 text-white"
+                  }`}
+                >
+                  Messages
                 </Link>
               </li>
             </ul>

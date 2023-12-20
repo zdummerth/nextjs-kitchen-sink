@@ -31,3 +31,27 @@ export const createAddresss = async (prev: any, formData: any) => {
     return { ...prev, error: true };
   }
 };
+
+export const createContact = async (prev: any, formData: any) => {
+  try {
+    const name = String(formData.get("name"));
+    const email = String(formData.get("email"));
+    const phone = String(formData.get("phone"));
+    const business_id = String(formData.get("business_id"));
+
+    const supabase = createServerActionClient<Database>({ cookies });
+
+    await supabase.from("contacts").insert({
+      name,
+      email,
+      phone,
+      business_id,
+    });
+    // revalidatePath("/");
+    // console.log("prev in form action: ", prev);
+    return { ...prev, success: true };
+  } catch (error) {
+    console.log(error);
+    return { ...prev, error: true };
+  }
+};

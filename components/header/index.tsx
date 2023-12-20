@@ -11,7 +11,7 @@ const Header = (props: {
   profile: Profile;
 }) => {
   return (
-    <header className="flex w-full bg-zinc-100 dark:bg-zinc-700">
+    <header className="flex w-full">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4">
           {/* <!-- Hamburger Toggle BTN --> */}

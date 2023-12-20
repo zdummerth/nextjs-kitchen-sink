@@ -1,39 +1,57 @@
+"use client";
 import React from "react";
 import { AddressElement } from "@stripe/react-stripe-js";
+import { Elements, useElements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
-const AddressForm = () => {
+const stripe = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_TEST_PUBLISHABLE_KEY as string
+);
+
+const Form = () => {
+  const elements = useElements();
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (!elements) return;
+    const addressElement = elements.getElement("address");
+    if (!addressElement) return;
+
+    const { complete, value } = await addressElement.getValue();
+
+    if (complete) {
+      console.log(value);
+    }
+  };
   return (
-    <form>
-      <h3>Billing</h3>
+    <form onSubmit={handleSubmit}>
       <AddressElement
         options={{
-          mode: "shipping",
+          mode: "billing",
           allowedCountries: ["US"],
           display: {
             name: "organization",
           },
-          defaultValues: {
-            address: {
-              state: "MO",
-              city: "St. Louis",
-              country: "US",
-            },
+          autocomplete: {
+            mode: "google_maps_api",
+            apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
           },
-          //   autocomplete: {
-          //     mode: "google_maps_api",
-          //     apiKey: process.env.GOOGLE_MAPS_API_KEY as string,
-          //   },
-        }}
-        onChange={(event) => {
-          if (event.complete) {
-            // Extract potentially complete address
-            const address = event.value.address;
-            console.log(address);
-          }
         }}
       />
+      <button type="submit" className="bg-blue-500 p-2 rounded-lg mt-8">
+        Submit
+      </button>
     </form>
   );
 };
 
-export default AddressForm;
+const ElementsWrapper = () => {
+  return (
+    <Elements stripe={stripe}>
+      <Form />
+    </Elements>
+  );
+};
+
+const StripeAddressForm = () => <ElementsWrapper />;
+
+export default StripeAddressForm;
