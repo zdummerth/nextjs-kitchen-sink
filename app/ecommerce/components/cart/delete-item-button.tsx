@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { removeItem } from "@/app/shop/components/cart/actions";
+import { removeItem } from "@/app/ecommerce/components/cart/actions";
 import LoadingDots from "@/components/loading-dots";
 import { useFormState, useFormStatus } from "react-dom";
 

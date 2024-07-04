@@ -2,42 +2,77 @@ import GradCapIcon from "@/lib/svg-icons/grad-cap";
 import CheckmarkIcon from "@/lib/svg-icons/checkmark";
 import PhotoIcon from "@/lib/svg-icons/photo";
 import CameraIcon from "@/lib/svg-icons/camera";
+import HtmlIcon from "@/lib/svg-icons/html";
+import GitIcon from "@/lib/svg-icons/git-icon";
+import GraphqlIcon from "@/lib/svg-icons/graphql-icon";
+import NodeIcon from "@/lib/svg-icons/node-icon";
+import PostgresIcon from "@/lib/svg-icons/postgres-icon";
+import PythonIcon from "@/lib/svg-icons/python-icon";
+import ReactIcon from "@/lib/svg-icons/react-icon";
+import TailwindIcon from "@/lib/svg-icons/tailwind-icon";
+import JavascriptIcon from "@/lib/svg-icons/javascript-icon";
+import NextIcon from "@/lib/svg-icons/nextjs-icon";
 
-const lorem =
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Error cumque tempore est ab possimus quisquam reiciendis tempora animi! Quaerat, saepe?";
+const description =
+  "Experienced in building dynamic web applications with a focus on clean code and efficient performance. Adept at both frontend and backend development, utilizing a variety of modern technologies and tools.";
 const data = {
-  header: "What makes us special",
-  description: lorem,
+  header: "My Skills and Experience",
+  description,
   gridItems: [
     {
-      title: "Lorem, ipsum dolor.",
-      description: lorem,
-      icon: GradCapIcon,
+      title: "JavaScript",
+      description: "Building dynamic and interactive web applications.",
+      icon: JavascriptIcon,
     },
     {
-      title: "Lorem, ipsum dolor.",
-      description: lorem,
+      title: "Python",
+      description: "Developing backend services and APIs.",
+      icon: PythonIcon,
+    },
+    {
+      title: "HTML/CSS",
+      description: "Creating responsive and accessible web designs.",
+      icon: HtmlIcon,
+    },
+    {
+      title: "React.js",
+      description: "Building modern and efficient user interfaces.",
+      icon: ReactIcon,
+    },
+    {
+      title: "Next.js",
+      description: "Optimizing web applications for performance and SEO.",
+      icon: NextIcon,
+    },
+    {
+      title: "SQL Databases",
+      description: "Designing and managing relational databases.",
       icon: CheckmarkIcon,
     },
     {
-      title: "Lorem, ipsum dolor.",
-      description: lorem,
-      icon: PhotoIcon,
+      title: "GraphQL",
+      description: "Querying and managing data with a flexible API.",
+      icon: GraphqlIcon,
     },
     {
-      title: "Lorem, ipsum dolor.",
-      description: lorem,
-      icon: CameraIcon,
+      title: "PostgreSQL",
+      description: "Developing and managing PostgreSQL databases.",
+      icon: PostgresIcon,
     },
     {
-      title: "Lorem, ipsum dolor.",
-      description: lorem,
-      icon: GradCapIcon,
+      title: "Node.js",
+      description: "Developing server-side applications and APIs.",
+      icon: NodeIcon,
     },
     {
-      title: "Lorem, ipsum dolor.",
-      description: lorem,
-      icon: CheckmarkIcon,
+      title: "Tailwind CSS",
+      description: "Styling web applications with utility-first CSS.",
+      icon: TailwindIcon,
+    },
+    {
+      title: "Git",
+      description: "Version control workflows.",
+      icon: GitIcon,
     },
   ],
 };
@@ -59,7 +94,7 @@ export default function ContentWithUspGrid() {
 
             return (
               <div key={index} className="flex items-start gap-4">
-                <span className="shrink-0 rounded-lg bg-gray-400 dark:bg-gray-800 p-4">
+                <span className="shrink-0 rounded-lg bg-gray-400 dark:bg-gray-800 p-2">
                   <Icon />
                 </span>
 

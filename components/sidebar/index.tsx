@@ -177,6 +177,39 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Messages
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/tickets"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
+                    pathname.includes("tickets") &&
+                    "bg-graydark dark:bg-meta-4 text-white"
+                  }`}
+                >
+                  Tickets
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/cms"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
+                    pathname.includes("cms") &&
+                    "bg-graydark dark:bg-meta-4 text-white"
+                  }`}
+                >
+                  CMS
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/math"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
+                    pathname.includes("math") &&
+                    "bg-graydark dark:bg-meta-4 text-white"
+                  }`}
+                >
+                  Math
+                </Link>
+              </li>
             </ul>
           </div>
         </nav>

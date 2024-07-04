@@ -43,11 +43,11 @@ export default function TripleImageWithContent() {
           <div className="space-y-6 sm:space-y-8 dark:text-gray-400">
             <div className="space-y-2 md:space-y-4">
               <h2 className="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-gray-100">
-                Collaborative tools to design user experience
+                View my other projects
               </h2>
               <p className="">
-                Use our tools to explore your ideas and make your vision come
-                true. Then share your work easily.
+                Check out more projects that show my development skills and
+                creative solutions
               </p>
             </div>
             <ul role="list" className="space-y-2 sm:space-y-4">

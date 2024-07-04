@@ -39,14 +39,14 @@ export const createContact = async (prev: any, formData: any) => {
     const phone = String(formData.get("phone"));
     const business_id = String(formData.get("business_id"));
 
-    const supabase = createServerActionClient<Database>({ cookies });
+    // const supabase = createServerActionClient<Database>({ cookies });
 
-    await supabase.from("contacts").insert({
-      name,
-      email,
-      phone,
-      business_id,
-    });
+    // await supabase.from("contacts").insert({
+    //   name,
+    //   email,
+    //   phone,
+    //   business_id,
+    // });
     // revalidatePath("/");
     // console.log("prev in form action: ", prev);
     return { ...prev, success: true };

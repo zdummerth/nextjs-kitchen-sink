@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProduct } from "@/lib/supabase-admin";
+import { getProduct } from "@/lib/supabase-server";
 // import { GridTileImage } from "@/components/grid/tile";
 // import Footer from "@/components/layout/footer";
 

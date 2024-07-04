@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { addItem } from "@/app/shop/components/cart/actions";
+import { addItem } from "@/app/ecommerce/components/cart/actions";
 import LoadingDots from "@/components/loading-dots";
 import { useSearchParams } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";

@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog, Transition } from "@headlessui/react";
-import Price from "@/app/shop/components/price";
+import Price from "@/app/ecommerce/components/price";
 import { createUrl } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";

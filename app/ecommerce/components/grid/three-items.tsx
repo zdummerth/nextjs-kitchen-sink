@@ -1,4 +1,4 @@
-import { GridTileImage } from "@/app/shop/components/grid/tile";
+import { GridTileImage } from "@/app/ecommerce/components/grid/tile";
 import Link from "next/link";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
