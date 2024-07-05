@@ -9,43 +9,6 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      addresses: {
-        Row: {
-          city: string
-          created_at: string
-          fts: unknown | null
-          house_number: string
-          id: number
-          secondary_address: string | null
-          state: string
-          street_name: string
-          zip: string
-          address_line1: string | null
-        }
-        Insert: {
-          city: string
-          created_at?: string
-          fts?: unknown | null
-          house_number: string
-          id?: number
-          secondary_address?: string | null
-          state: string
-          street_name: string
-          zip: string
-        }
-        Update: {
-          city?: string
-          created_at?: string
-          fts?: unknown | null
-          house_number?: string
-          id?: number
-          secondary_address?: string | null
-          state?: string
-          street_name?: string
-          zip?: string
-        }
-        Relationships: []
-      }
       block_image: {
         Row: {
           block_id: number
@@ -133,128 +96,32 @@ export type Database = {
         }
         Relationships: []
       }
-      business: {
-        Row: {
-          created_at: string
-          id: number
-          mailing_address: number
-          name: string
-          primary_address: number
-          primary_contact: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          mailing_address: number
-          name: string
-          primary_address: number
-          primary_contact?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          mailing_address?: number
-          name?: string
-          primary_address?: number
-          primary_contact?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "business_mailing_address_fkey"
-            columns: ["mailing_address"]
-            isOneToOne: false
-            referencedRelation: "addresses"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "business_primary_address_fkey"
-            columns: ["primary_address"]
-            isOneToOne: false
-            referencedRelation: "addresses"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "business_primary_contact_fkey"
-            columns: ["primary_contact"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      business_address: {
-        Row: {
-          address_id: number
-          business_id: number
-          created_at: string
-          id: number
-          location: string
-        }
-        Insert: {
-          address_id: number
-          business_id: number
-          created_at?: string
-          id?: number
-          location: string
-        }
-        Update: {
-          address_id?: number
-          business_id?: number
-          created_at?: string
-          id?: number
-          location?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "business_address_address_id_fkey"
-            columns: ["address_id"]
-            isOneToOne: false
-            referencedRelation: "addresses"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "business_address_business_id_fkey"
-            columns: ["business_id"]
-            isOneToOne: false
-            referencedRelation: "business"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       contacts: {
         Row: {
-          business_id: number | null
-          created_at: string
+          address: string | null
+          avatar_url: string | null
           email: string | null
           id: string
-          name: string
+          name: string | null
           phone: string | null
         }
         Insert: {
-          business_id?: number | null
-          created_at?: string
+          address?: string | null
+          avatar_url?: string | null
           email?: string | null
           id?: string
-          name: string
+          name?: string | null
           phone?: string | null
         }
         Update: {
-          business_id?: number | null
-          created_at?: string
+          address?: string | null
+          avatar_url?: string | null
           email?: string | null
           id?: string
-          name?: string
+          name?: string | null
           phone?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "contacts_business_id_fkey"
-            columns: ["business_id"]
-            isOneToOne: false
-            referencedRelation: "business"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       images: {
         Row: {
@@ -550,36 +417,47 @@ export type Database = {
       }
       tickets: {
         Row: {
+          assigned_to: string | null
           category: string
           created_at: string
           description: string
-          id: number
+          id: string
           priority: number
           progress: number
           status: string
           title: string
         }
         Insert: {
+          assigned_to?: string | null
           category: string
           created_at?: string
           description: string
-          id?: number
-          priority: number
-          progress: number
+          id?: string
+          priority?: number
+          progress?: number
           status: string
           title: string
         }
         Update: {
+          assigned_to?: string | null
           category?: string
           created_at?: string
           description?: string
-          id?: number
+          id?: string
           priority?: number
           progress?: number
           status?: string
           title?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "tickets_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       tweet_image: {
         Row: {
@@ -652,12 +530,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      address_line1: {
-        Args: {
-          "": unknown
-        }
-        Returns: string
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never

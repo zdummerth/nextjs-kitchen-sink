@@ -7,6 +7,7 @@ type DBProduct = DB["public"]["Tables"]["products"]["Row"];
 type DBProductVariant = DB["public"]["Tables"]["product_variants"]["Row"];
 type DBTweetImage = DB["public"]["Tables"]["tweet_image"]["Row"];
 type DBTicket = DB["public"]["Tables"]["tickets"]["Row"];
+type DBContact = DB["public"]["Tables"]["contacts"]["Row"];
 
 declare global {
   type Database = DB;
@@ -42,4 +43,5 @@ declare global {
     file: File;
   };
   type Ticket = DBTicket;
+  type Contact = DBContact;
 }

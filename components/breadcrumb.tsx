@@ -1,26 +1,38 @@
+import { clsx } from "clsx";
 import Link from "next/link";
-interface BreadcrumbProps {
-  pageName: string;
+import { lusitana } from "@/app/ui/fonts";
+
+interface Breadcrumb {
+  label: string;
+  href: string;
+  active?: boolean;
 }
-const Breadcrumb = ({ pageName }: BreadcrumbProps) => {
+
+export default function Breadcrumbs({
+  breadcrumbs,
+}: {
+  breadcrumbs: Breadcrumb[];
+}) {
   return (
-    <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <h2 className="text-title-md2 font-semibold text-black dark:text-white">
-        {pageName}
-      </h2>
-
-      <nav>
-        <ol className="flex items-center gap-2">
-          <li>
-            <Link className="font-medium" href="/">
-              Dashboard /
-            </Link>
+    <nav aria-label="Breadcrumb" className="mb-6 block">
+      <ol className={clsx(lusitana.className, "flex text-xl md:text-2xl")}>
+        {breadcrumbs.map((breadcrumb, index) => (
+          <li
+            key={breadcrumb.href}
+            aria-current={breadcrumb.active}
+            className={clsx(
+              breadcrumb.active
+                ? "text-gray-900 dark:text-gray-300"
+                : "text-gray-500 dark:text-gray-400"
+            )}
+          >
+            <Link href={breadcrumb.href}>{breadcrumb.label}</Link>
+            {index < breadcrumbs.length - 1 ? (
+              <span className="mx-3 inline-block">/</span>
+            ) : null}
           </li>
-          <li className="font-medium text-primary">{pageName}</li>
-        </ol>
-      </nav>
-    </div>
+        ))}
+      </ol>
+    </nav>
   );
-};
-
-export default Breadcrumb;
+}

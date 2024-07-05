@@ -17,7 +17,6 @@ export default function AccountForm({ profile }: { profile: Profile }) {
   const [username, setUsername] = useState<string | null>(profile.username);
   const router = useRouter();
 
-  console.log("profile in AccountForm: ", avatar_url);
   async function updateProfile({
     website,
     avatar_url,
@@ -27,7 +26,6 @@ export default function AccountForm({ profile }: { profile: Profile }) {
   }) {
     try {
       setLoading(true);
-      console.log("update params: ", { website, avatar_url });
 
       let res = await supabase
         .from("profiles")
@@ -36,7 +34,6 @@ export default function AccountForm({ profile }: { profile: Profile }) {
           avatar_url: avatar_url,
         })
         .eq("id", profile.id);
-      console.log("res in updateProfile: ", res);
       if (res.error) throw res.error;
       router.refresh();
     } catch (error) {
@@ -48,7 +45,7 @@ export default function AccountForm({ profile }: { profile: Profile }) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto mt-4 rounded-md border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div className="max-w-2xl mx-auto mt-4 rounded-md border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex flex-col items-center border-b border-stroke py-16 dark:border-strokedark">
         <Avatar
           uid={profile.id}
@@ -68,9 +65,7 @@ export default function AccountForm({ profile }: { profile: Profile }) {
         }}
       >
         <div>
-          <label className="mb-3 block text-black dark:text-white">
-            Username
-          </label>
+          <label className="mb-3 block">Username</label>
           <span className="text-red-600">
             {isDemoUser(profile.username) && "Disbaled for demo users"}
           </span>

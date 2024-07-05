@@ -1,6 +1,5 @@
 import StatusDisplay from "./status-display";
 import PriorityDisplay from "./priority-display";
-import DeleteBlock from "./delete-block";
 import ProgressDisplay from "./progress-display";
 import Link from "next/link";
 
@@ -24,17 +23,14 @@ const TicketCard = ({ ticket }: { ticket: Ticket }) => {
   const createdDateTime = formatTimestamp(ticket.created_at);
 
   return (
-    <div className="flex flex-col hover:bg-card-hover bg-card rounded-md shadow-lg p-3">
+    <div className="flex flex-col hover:bg-card-hover rounded-md shadow-lg p-3">
       <div className="flex mb-3">
         <PriorityDisplay priority={ticket.priority} />
         <div className="ml-auto">
-          <DeleteBlock id={ticket.id} />
+          <p className="text-xs my-1">{ticket.category}</p>
         </div>
       </div>
-      <Link
-        href={`/tickets/ticket/${ticket.id}`}
-        style={{ display: "contents" }}
-      >
+      <Link href={`/tickets/${ticket.id}/edit`} style={{ display: "contents" }}>
         <h4 className="mb-1">{ticket.title}</h4>
         <hr className="h-px  border-0 bg-page mb-2 "></hr>
         <p className="whitespace-pre-wrap">{ticket.description}</p>

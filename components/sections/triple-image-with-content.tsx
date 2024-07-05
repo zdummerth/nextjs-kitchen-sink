@@ -1,5 +1,7 @@
 import CheckmarkIcon from "@/lib/svg-icons/checkmark";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 
 export default function TripleImageWithContent() {
   return (
@@ -45,10 +47,6 @@ export default function TripleImageWithContent() {
               <h2 className="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-gray-100">
                 View my other projects
               </h2>
-              <p className="">
-                Check out more projects that show my development skills and
-                creative solutions
-              </p>
             </div>
             <ul role="list" className="space-y-2 sm:space-y-4">
               <li className="flex space-x-3">
@@ -57,7 +55,16 @@ export default function TripleImageWithContent() {
                 </span>
 
                 <span className="text-sm sm:text-base">
-                  Less routine – more creativity
+                  <a
+                    href="https://www.ninthfool.com/"
+                    className="text-blue-600 dark:text-blue-400 block mr-4"
+                    target="_blank"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span>The Ninth Fool</span>
+                      <ArrowTopRightOnSquareIcon className="h-5 w-5 inline-block" />
+                    </div>
+                  </a>
                 </span>
               </li>
 
@@ -67,17 +74,16 @@ export default function TripleImageWithContent() {
                 </span>
 
                 <span className="text-sm sm:text-base">
-                  Hundreds of thousands saved
-                </span>
-              </li>
-
-              <li className="flex space-x-3">
-                <span className="mt-0.5 h-5 w-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
-                  <CheckmarkIcon />
-                </span>
-
-                <span className="text-sm sm:text-base">
-                  Scale budgets efficiently
+                  <a
+                    href="https://www.outdoorsbychaz.com/"
+                    className="text-blue-600 dark:text-blue-400 block mr-4"
+                    target="_blank"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span>Outdoors By Chaz</span>
+                      <ArrowTopRightOnSquareIcon className="h-5 w-5 inline-block" />
+                    </div>
+                  </a>
                 </span>
               </li>
             </ul>

@@ -60,11 +60,10 @@ export default async function Home() {
           }}
         />
 
-        <ContentWithUspGrid />
         <DualImageWithContent />
+        <ContentWithUspGrid />
         <TripleImageWithContent />
-        <DefaultHero />
-        <StickyImageWithContent />
+        {/* <StickyImageWithContent /> */}
       </div>
     </div>
   );

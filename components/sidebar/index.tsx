@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import SidebarLinkGroup from "./sidebar-link-group";
 import RotatingArrowIcon from "@/lib/svg-icons/rotating-arrow";
 import LeftArrowIcon from "@/lib/svg-icons/left-arrow";
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -59,7 +60,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`fixed left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden duration-300 ease-linear bg-zinc-100 dark:bg-zinc-800 ${
+      className={`fixed left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden duration-300 ease-linear bg-gray-100 dark:bg-gray-700 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -72,7 +73,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           aria-expanded={sidebarOpen}
           className="block"
         >
-          <LeftArrowIcon />
+          <ArrowLeftCircleIcon className="h-8 w-8" />
         </button>
       </div>
       {/* <!-- SIDEBAR HEADER --> */}
@@ -82,13 +83,21 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
           {/* <!-- Menu Group --> */}
           <div>
-            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
-              MENU
-            </h3>
+            <h3 className="mb-4 ml-4 text-sm font-semibold">Menu</h3>
 
             <ul className="mb-6 flex flex-col gap-1.5">
+              <li>
+                <Link
+                  href="/"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
+                    pathname.includes("/") && "bg-graydark dark:bg-meta-4"
+                  }`}
+                >
+                  Home
+                </Link>
+              </li>
               {/* <!-- Menu Item Dashboard --> */}
-              <SidebarLinkGroup
+              {/* <SidebarLinkGroup
                 activeCondition={
                   pathname === "/" || pathname.includes("ecommerce")
                 }
@@ -99,8 +108,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       <Link
                         href="#"
                         className={`group block relative flex justify-between gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
-                          pathname === "/" &&
-                          "bg-graydark dark:bg-meta-4 text-white"
+                          pathname === "/" && "bg-graydark dark:bg-meta-4"
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -114,7 +122,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           <RotatingArrowIcon open={open} />
                         </span>
                       </Link>
-                      {/* <!-- Dropdown Menu Start --> */}
                       <div
                         className={`translate transform overflow-hidden ${
                           !open && "hidden"
@@ -139,17 +146,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           </li>
                         </ul>
                       </div>
-                      {/* <!-- Dropdown Menu End --> */}
                     </React.Fragment>
                   );
                 }}
-              </SidebarLinkGroup>
+              </SidebarLinkGroup> */}
               <li>
                 <Link
                   href="/social"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
-                    pathname.includes("social") &&
-                    "bg-graydark dark:bg-meta-4 text-white"
+                    pathname.includes("social") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >
                   Social
@@ -157,24 +162,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </li>
               <li>
                 <Link
-                  href="/business-management"
+                  href="/contacts"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
-                    pathname.includes("business-management") &&
+                    pathname.includes("contacts") &&
                     "bg-graydark dark:bg-meta-4 text-white"
                   }`}
                 >
-                  Businesses
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/messages"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
-                    pathname.includes("messages") &&
-                    "bg-graydark dark:bg-meta-4 text-white"
-                  }`}
-                >
-                  Messages
+                  Contacts
                 </Link>
               </li>
               <li>
@@ -186,28 +180,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   }`}
                 >
                   Tickets
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cms"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
-                    pathname.includes("cms") &&
-                    "bg-graydark dark:bg-meta-4 text-white"
-                  }`}
-                >
-                  CMS
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/math"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out hover:bg-graydark hover:text-white dark:hover:bg-meta-4 ${
-                    pathname.includes("math") &&
-                    "bg-graydark dark:bg-meta-4 text-white"
-                  }`}
-                >
-                  Math
                 </Link>
               </li>
             </ul>
